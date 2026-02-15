@@ -22,13 +22,14 @@ from cipher_module import (
     hill_decrypt,
 )
 
-# File paths
-BASE_DIR = Path(__file__).parent
-PLAINTEXT_FILE = BASE_DIR / "plaintext.txt"
-KEYS_FILE = BASE_DIR / "keys.txt"
-CAESAR_CIPHER_FILE = BASE_DIR / "caesar_cipher.txt"
-PLAYFAIR_CIPHER_FILE = BASE_DIR / "playfair_cipher.txt"
-HILL_CIPHER_FILE = BASE_DIR / "hill_cipher.txt"
+# File paths (project root = parent of src/)
+PROJECT_ROOT = Path(__file__).parent.parent
+DATA_DIR = PROJECT_ROOT / "data"
+PLAINTEXT_FILE = DATA_DIR / "plaintext.txt"
+KEYS_FILE = DATA_DIR / "keys.txt"
+CAESAR_CIPHER_FILE = DATA_DIR / "caesar_cipher.txt"
+PLAYFAIR_CIPHER_FILE = DATA_DIR / "playfair_cipher.txt"
+HILL_CIPHER_FILE = DATA_DIR / "hill_cipher.txt"
 
 # Default keys (assignment examples)
 DEFAULT_CAESAR_SHIFT = 3

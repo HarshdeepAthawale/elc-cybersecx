@@ -8,8 +8,13 @@ Output: submission.pdf
 
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent
-OUTPUT_PDF = BASE_DIR / "submission.pdf"
+PROJECT_ROOT = Path(__file__).parent.parent
+DATA_DIR = PROJECT_ROOT / "data"
+ASSETS_DIR = PROJECT_ROOT / "assets"
+SRC_DIR = PROJECT_ROOT / "src"
+OUTPUT_DIR = PROJECT_ROOT / "output"
+OUTPUT_PDF = OUTPUT_DIR / "submission.pdf"
+OUTPUT_DIR.mkdir(exist_ok=True)
 
 # Page dimensions
 PAGE_WIDTH = 612
@@ -108,7 +113,7 @@ def main() -> None:
 
     # ========== 1. ENCRYPTION KEYS ==========
     story.append(Paragraph("1. Encryption Keys", section_style))
-    keys_file = BASE_DIR / "keys.txt"
+    keys_file = DATA_DIR / "keys.txt"
     if keys_file.exists():
         keys_text = keys_file.read_text().strip()
     else:
@@ -118,7 +123,7 @@ def main() -> None:
 
     # ========== 2. PLAINTEXT ==========
     story.append(Paragraph("2. Plaintext (Input)", section_style))
-    pt_file = BASE_DIR / "plaintext.txt"
+    pt_file = DATA_DIR / "plaintext.txt"
     if pt_file.exists():
         pt_content = pt_file.read_text()
         story.append(Preformatted(safe_text(truncate(pt_content, 600)), code_style))
@@ -127,9 +132,9 @@ def main() -> None:
     # ========== 3. CIPHERTEXTS ==========
     story.append(Paragraph("3. Ciphertext Outputs (sample)", section_style))
     for name, path in [
-        ("Caesar", BASE_DIR / "caesar_cipher.txt"),
-        ("Playfair", BASE_DIR / "playfair_cipher.txt"),
-        ("Hill", BASE_DIR / "hill_cipher.txt"),
+        ("Caesar", DATA_DIR / "caesar_cipher.txt"),
+        ("Playfair", DATA_DIR / "playfair_cipher.txt"),
+        ("Hill", DATA_DIR / "hill_cipher.txt"),
     ]:
         story.append(Paragraph(f"<b>{name}</b> (first 250 chars):", code_title_style))
         if path.exists():
@@ -165,7 +170,7 @@ def main() -> None:
     # ========== 5. GRAPHS ==========
     story.append(Paragraph("5. Timing Graphs", section_style))
     for img_name in ["encryption_time.png", "decryption_time.png"]:
-        img_path = BASE_DIR / img_name
+        img_path = ASSETS_DIR / img_name
         if img_path.exists():
             img = Image(str(img_path), width=5.5 * inch, height=2.75 * inch)
             story.append(img)
@@ -196,9 +201,9 @@ def main() -> None:
     ))
 
     code_files = [
-        ("main.py", BASE_DIR / "main.py"),
-        ("cipher_module.py", BASE_DIR / "cipher_module.py"),
-        ("timing_results.py", BASE_DIR / "timing_results.py"),
+        ("main.py", SRC_DIR / "main.py"),
+        ("cipher_module.py", SRC_DIR / "cipher_module.py"),
+        ("timing_results.py", SRC_DIR / "timing_results.py"),
     ]
 
     for fname, fpath in code_files:

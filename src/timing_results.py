@@ -5,9 +5,10 @@ Generates bar charts for encryption and decryption times.
 
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent
-ENCRYPTION_GRAPH = BASE_DIR / "encryption_time.png"
-DECRYPTION_GRAPH = BASE_DIR / "decryption_time.png"
+PROJECT_ROOT = Path(__file__).parent.parent
+ASSETS_DIR = PROJECT_ROOT / "assets"
+ENCRYPTION_GRAPH = ASSETS_DIR / "encryption_time.png"
+DECRYPTION_GRAPH = ASSETS_DIR / "decryption_time.png"
 
 
 def generate_graphs(timings: dict[str, dict[str, float]]) -> None:
