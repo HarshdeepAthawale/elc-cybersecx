@@ -1,0 +1,3 @@
+This is sample transaction data for the encryption module.
+Testing Caesar, Playfair, and Hill ciphers.
+ELC Secure Network Configuration assignment.
